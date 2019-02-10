@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Node.h"
+#include <Node.h>
 
 int
 main()
@@ -8,6 +8,7 @@ main()
     std::cout << "Hello, World!" << std::endl;
     std::string test = "blaahhahahaha";
     unsigned long order = 5;
+
     auto main_node = Node(order, 0, &test);
     main_node.push(new Node(order, 1, &test));
     main_node.push(new Node(order, 4, &test));

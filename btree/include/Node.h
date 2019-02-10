@@ -7,30 +7,26 @@
 
 #include <vector>
 #include <string>
+#include "LList.h"
 
 typedef long long int NVal;
 
-class Node
+class Node : public LList
 {
 private:
-    unsigned long child_cap;
-    std::vector<Node *> children;
     NVal value;
-    void *data;
+    Node *lo_left;
+    Node *lo_right;
+    unsigned int order;
+    bool vertex;
 public:
-    Node(unsigned long child_cap, NVal value, void *data);
+    Node(void *data, NVal value, unsigned int order);
 
     NVal
     getValue() const;
 
-    void *
-    getData() const;
-
-    void
-    push(Node *child);
-
-    const std::vector<Node *> &
-    getChildren() const;
+    Node *
+    push(Node *node);
 
     // TODO : For test
     void

@@ -3,4 +3,6 @@ project(btree)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(btree main.cpp Node.cc Node.h)
+include_directories(include)
+
+add_executable(btree main.cpp src/Node.cc include/Node.h src/LList.cc include/LList.h)
