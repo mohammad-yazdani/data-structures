@@ -10,9 +10,16 @@ class LList
 protected:
     LList * prev;
     LList * next;
-    void * data;
 public:
-    LList(void *data);
+    LList();
+    LList *
+    getPrev() const;
+    void
+    setPrev(LList *prev);
+    LList *
+    getNext() const;
+    void
+    setNext(LList *next);
 };
 
 #endif //BTREE_LLIST_H

@@ -3,4 +3,24 @@
 //
 
 #include "LList.h"
-LList::LList(void *data) : data(data), prev(nullptr), next(nullptr) {}
+LList::LList() : prev(nullptr), next(nullptr) {}
+LList *
+LList::getPrev() const
+{
+    return prev;
+}
+void
+LList::setPrev(LList *prev)
+{
+    LList::prev = prev;
+}
+LList *
+LList::getNext() const
+{
+    return next;
+}
+void
+LList::setNext(LList *next)
+{
+    LList::next = next;
+}
