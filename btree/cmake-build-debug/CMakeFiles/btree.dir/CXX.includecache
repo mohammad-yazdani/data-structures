@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/raynor106/btree/Node.cc
+iostream
+-
+Node.h
+/Users/raynor106/btree/Node.h
+
+/Users/raynor106/btree/Node.h
+vector
+-
+string
+-
+
