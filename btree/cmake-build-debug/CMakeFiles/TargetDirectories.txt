@@ -1,3 +1,0 @@
-/Users/raynor106/btree/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/raynor106/btree/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/raynor106/btree/cmake-build-debug/CMakeFiles/btree.dir
