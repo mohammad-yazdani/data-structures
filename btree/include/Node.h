@@ -47,15 +47,18 @@ public:
     NID
     push(Node *node);
 
-    Node *
-    pop(NVal val);
+    void
+    pop();
+
+    void
+    split();
 
     NID
     getId() const;
 
     // TODO : For test
     void
-    print(std::string offset);
+    print(std::string offset, bool forward);
 };
 
 #endif //BTREE_NODE_H

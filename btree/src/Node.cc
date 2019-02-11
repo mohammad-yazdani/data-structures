@@ -20,11 +20,27 @@ Node::getValue() const
 }
 
 void
-Node::print(std::string offset)
+Node::print(std::string offset, bool forward)
 {
     std::cout << offset << getValue() << std::endl;
-    if (getNext())
-        getNext()->print(offset);
+    if (vertex)
+    {
+        auto padded = offset + offset[0];
+        if (lo_left)
+        {
+            std::cout << padded << "left:" << std::endl;
+            lo_left->print(padded, false);
+        }
+        if (lo_right)
+        {
+            std::cout << padded << "right:" << std::endl;
+            lo_right->print(padded, true);
+        }
+    }
+    if (forward && getNext())
+        getNext()->print(offset, forward);
+    else if (!forward && getPrev())
+        getPrev()->print(offset, forward);
 }
 
 NID
@@ -76,7 +92,7 @@ Node::getNext()
 Node *
 Node::push_down(Node *node)
 {
-    (void)node;
+    (void) node;
     // TODO : else If order just add to list
     // TODO : Else Break the list
     return nullptr;
@@ -110,8 +126,24 @@ Node::getId() const
 {
     return id;
 }
-Node *
-Node::pop(NVal val)
+void
+Node::pop()
 {
-    return nullptr;
+    auto left = getPrev();
+    auto right = getNext();
+    left->setNext(right);
+    right->setPrev(left);
+}
+void
+Node::split()
+{
+    auto left = getPrev();
+    auto right = getNext();
+    left->setNext(nullptr);
+    right->setPrev(nullptr);
+    setPrev(nullptr);
+    setNext(nullptr);
+    lo_left = left;
+    lo_right = right;
+    vertex = true;
 }
