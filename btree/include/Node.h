@@ -10,19 +10,17 @@
 #include <unistd.h>
 #include "LList.h"
 
-typedef uint64_t NID;
+class BPTree;
+
 typedef long long int NVal;
 
 class Node : public LList
 {
 private:
-    static NID id_bag;
     NVal value;
-    Node *lo_left;
-    Node *lo_right;
-    unsigned int order;
-    bool vertex;
-    NID id;
+    void *data;
+    BPTree *lo;
+    BPTree *hi;
 
     Node *
     getPrev();
@@ -30,21 +28,27 @@ private:
     Node *
     getNext();
 
-    Node *
-    push_down(Node *node);
-
     void
     putBehind(Node *node);
 
     void
     putForward(Node *node);
 public:
-    Node(unsigned int order, NVal value);
+    Node(NVal value, void *data);
 
     NVal
     getValue() const;
 
-    NID
+    BPTree *
+    getLo() const;
+
+    BPTree *
+    getHi() const;
+
+    Node *
+    closest(NVal val);
+
+    Node *
     push(Node *node);
 
     void
@@ -52,9 +56,6 @@ public:
 
     void
     split();
-
-    NID
-    getId() const;
 
     // TODO : For test
     void

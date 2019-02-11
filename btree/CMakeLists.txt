@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
-add_executable(btree main.cpp src/Node.cc include/Node.h src/LList.cc include/LList.h)
+add_executable(btree main.cpp src/Node.cc include/Node.h src/LList.cc include/LList.h src/BPTree.cc include/BPTree.h)

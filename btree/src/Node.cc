@@ -4,14 +4,8 @@
 #include <iostream>
 #include <Node.h>
 
-NID Node::id_bag = 0;
-
-Node::Node(unsigned int order, NVal value)
-    : order(order), value(value), vertex(false), lo_left(nullptr), lo_right(nullptr)
-{
-    id = id_bag;
-    id_bag += 1;
-}
+Node::Node(NVal value, void *data)
+    : value(value), data(data), lo(nullptr), hi(nullptr) {}
 
 NVal
 Node::getValue() const
@@ -23,38 +17,15 @@ void
 Node::print(std::string offset, bool forward)
 {
     std::cout << offset << getValue() << std::endl;
-    if (vertex)
-    {
-        auto padded = offset + offset[0];
-        if (lo_left)
-        {
-            std::cout << padded << "left:" << std::endl;
-            lo_left->print(padded, false);
-        }
-        if (lo_right)
-        {
-            std::cout << padded << "right:" << std::endl;
-            lo_right->print(padded, true);
-        }
-    }
     if (forward && getNext())
         getNext()->print(offset, forward);
     else if (!forward && getPrev())
         getPrev()->print(offset, forward);
 }
 
-NID
+Node *
 Node::push(Node *node)
 {
-    if (vertex)
-    {
-        if (push_down(node))
-        {
-            // TODO : Throw exception
-            exit(1234);
-        }
-    }
-
     if (node->value > value)
     {
         if (getNext())
@@ -77,7 +48,7 @@ Node::push(Node *node)
             putBehind(node);
         }
     }
-    return node->getId();
+    return nullptr;
 }
 Node *
 Node::getPrev()
@@ -88,14 +59,6 @@ Node *
 Node::getNext()
 {
     return (Node *) next;
-}
-Node *
-Node::push_down(Node *node)
-{
-    (void) node;
-    // TODO : else If order just add to list
-    // TODO : Else Break the list
-    return nullptr;
 }
 void
 Node::putBehind(Node *node)
@@ -121,11 +84,6 @@ Node::putForward(Node *node)
     setNext(node);
     node->setPrev(this);
 }
-NID
-Node::getId() const
-{
-    return id;
-}
 void
 Node::pop()
 {
@@ -143,7 +101,41 @@ Node::split()
     right->setPrev(nullptr);
     setPrev(nullptr);
     setNext(nullptr);
-    lo_left = left;
-    lo_right = right;
-    vertex = true;
+    // TODO : set lo and hi
+}
+Node *
+Node::closest(NVal val)
+{
+    if (val > value)
+    {
+        if (getNext())
+        {
+            return getNext()->closest(val);
+        }
+        else
+        {
+            return this;
+        }
+    }
+    else
+    {
+        if (getPrev() && getPrev()->value > val)
+        {
+            return getPrev()->closest(val);
+        }
+        else
+        {
+            return this;
+        }
+    }
+}
+BPTree *
+Node::getLo() const
+{
+    return lo;
+}
+BPTree *
+Node::getHi() const
+{
+    return hi;
 }
