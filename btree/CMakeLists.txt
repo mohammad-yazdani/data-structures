@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(include)
 
 add_executable(btree
-        main.cpp src/BPTree.cc include/BPTree.h include/KV.h)
+        main.cpp src/BPTree.cc include/BPTree.h include/KV.h src/Vertex.cc include/Vertex.h)

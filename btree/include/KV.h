@@ -5,31 +5,24 @@
 #ifndef BTREE_KV_H
 #define BTREE_KV_H
 
-class BPTree;
-
 class KV
 {
 private:
-    unsigned long key;
-    void *value;
-    BPTree *parent;
+    const unsigned long key;
+    const void *value;
 public:
-    KV(unsigned long key, void *value, BPTree *parent)
-        : key(key), value(value), parent(parent) {}
-    unsigned long
+    KV(const unsigned long key, const void *value) : key(key), value(value) {}
+
+    const unsigned long
     getKey() const
     {
         return key;
     }
-    void *
+
+    const void *
     getValue() const
     {
         return value;
-    }
-    BPTree *
-    getParent() const
-    {
-        return parent;
     }
 };
 

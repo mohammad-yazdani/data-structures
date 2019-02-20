@@ -6,17 +6,22 @@
 #define BTREE_BPTREE_H
 
 #include <vector>
-#include "KV.h"
+#include "Vertex.h"
 
 class BPTree
 {
 private:
     unsigned int order;
-    std::vector<KV> data;
+    std::vector<Vertex *> data;
+    bool root;
+    bool dnode;
 public:
     explicit BPTree(unsigned int order);
-    void
-    add(KV kv);
+    BPTree(unsigned int order, const std::vector<Vertex *> &data);
+    Vertex *
+    add(Vertex *vertex);
+    BPTree *
+    find_closest(unsigned long key);
 };
 
 #endif //BTREE_BPTREE_H
