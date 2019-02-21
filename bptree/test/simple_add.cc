@@ -16,5 +16,8 @@ main()
         tree.add(new Vertex(static_cast<unsigned long>(i), &data));
     }
 
+    tree.add(new Vertex(static_cast<unsigned long>(12), &data));
+    tree.add(new Vertex(static_cast<unsigned long>(6), &data));
+
     return 0;
 }
